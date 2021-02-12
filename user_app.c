@@ -94,9 +94,20 @@ Promises:
 */
 void UserAppRun(void)
 {
-    u32 u32Counter = FCY/2;
-    PORTA^=0x01;
-    __delay_ms(500);
+    u8 u8LedCounter = 0x80;
+    while (1)
+    {
+        if (u8LedCounter < 0xbf)
+        {
+            u8LedCounter++;
+        }
+        else 
+        {
+            u8LedCounter = 0x80;
+        }
+        LATA = u8LedCounter;
+        __delay_ms(250);
+    }
 
 } /* end UserAppRun */
 

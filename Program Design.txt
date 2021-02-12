@@ -1,0 +1,15 @@
+Code Design
+
+count = 1000 000 (binary)
+Loop
+{
+	if (count < 1011 1111)
+	{
+		increment count
+	}
+	else
+	{
+		count = 1000 000
+	}
+	LATA = count
+}
