@@ -27315,6 +27315,27 @@ void UserAppInitialize(void)
 # 95 "user_app.c"
 void UserAppRun(void)
 {
+    static u8 u8ButtonState = 0;
 
 
+
+
+    u8 u8LedCounter = 0x80;
+
+    if (u8ButtonState == 0)
+    {
+        if (PORTB & 00100000 == 00100000)
+            u8ButtonState = 1;
+    }
+    else if (u8ButtonState == 1)
+    {
+        u8LedCounter++;
+        LATA = 10000000 | u8LedCounter;
+        u8ButtonState = 2;
+    }
+    else if (u8ButtonState == 2)
+    {
+        if (PORTB & 00100000 == 00000000)
+            u8ButtonState = 0;
+    }
 }

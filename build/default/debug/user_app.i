@@ -27315,8 +27315,19 @@ void UserAppInitialize(void)
 # 95 "user_app.c"
 void UserAppRun(void)
 {
-    u32 u32Counter = (u32)64000000/4/2;
-    PORTA^=0x01;
-    _delay((unsigned long)((500)*(16000000/4000.0)));
+    u8 u8LedCounter = 0x80;
+    while (1)
+    {
+        if (u8LedCounter < 0xbf)
+        {
+            u8LedCounter++;
+        }
+        else
+        {
+            u8LedCounter = 0x80;
+        }
+        LATA = u8LedCounter;
+        _delay((unsigned long)((400)*(16000000/4000.0)));
+    }
 
 }

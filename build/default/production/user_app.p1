@@ -1,4 +1,10 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"46157 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 46157: extern volatile unsigned char PORTB __attribute__((address(0x4CF)));
+[v _PORTB `Vuc ~T0 @X0 0 e@1231 ]
+"45585
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 45585: extern volatile unsigned char LATA __attribute__((address(0x4BE)));
+[v _LATA `Vuc ~T0 @X0 0 e@1214 ]
 "30 ./configuration.h
 [p x FEXTOSC  =  OFF     ]
 "31
@@ -2543,7 +2549,74 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _UserAppRun ]
 [f ]
-"99
-[; ;user_app.c: 99: }
+"97
+[; ;user_app.c: 97:     static u8 u8ButtonState = 0;
+[v F15920 `uc ~T0 @X0 1 s u8ButtonState ]
+[i F15920
+-> -> 0 `i `uc
+]
+"102
+[; ;user_app.c: 102:     u8 u8LedCounter = 0x80;
+[v _u8LedCounter `uc ~T0 @X0 1 a ]
+[e = _u8LedCounter -> -> 128 `i `uc ]
+"104
+[; ;user_app.c: 104:     if (u8ButtonState == 0)
+[e $ ! == -> F15920 `i -> 0 `i 2274  ]
+"105
+[; ;user_app.c: 105:     {
+{
+"106
+[; ;user_app.c: 106:         if (PORTB & 00100000 == 00100000)
+[e $ ! != & -> _PORTB `i -> == -> 32768 `ui -> 32768 `ui `i -> 0 `i 2275  ]
+"107
+[; ;user_app.c: 107:             u8ButtonState = 1;
+[e = F15920 -> -> 1 `i `uc ]
+[e :U 2275 ]
+"108
+[; ;user_app.c: 108:     }
+}
+[e $U 2276  ]
+"109
+[; ;user_app.c: 109:     else if (u8ButtonState == 1)
+[e :U 2274 ]
+[e $ ! == -> F15920 `i -> 1 `i 2277  ]
+"110
+[; ;user_app.c: 110:     {
+{
+"111
+[; ;user_app.c: 111:         u8LedCounter++;
+[e ++ _u8LedCounter -> -> 1 `i `uc ]
+"112
+[; ;user_app.c: 112:         LATA = 10000000 | u8LedCounter;
+[e = _LATA -> | -> 10000000 `l -> _u8LedCounter `l `uc ]
+"113
+[; ;user_app.c: 113:         u8ButtonState = 2;
+[e = F15920 -> -> 2 `i `uc ]
+"114
+[; ;user_app.c: 114:     }
+}
+[e $U 2278  ]
+"115
+[; ;user_app.c: 115:     else if (u8ButtonState == 2)
+[e :U 2277 ]
+[e $ ! == -> F15920 `i -> 2 `i 2279  ]
+"116
+[; ;user_app.c: 116:     {
+{
+"117
+[; ;user_app.c: 117:         if (PORTB & 00100000 == 00000000)
+[e $ ! != & -> _PORTB `i -> == -> 32768 `ui -> -> 0 `i `ui `i -> 0 `i 2280  ]
+"118
+[; ;user_app.c: 118:             u8ButtonState = 0;
+[e = F15920 -> -> 0 `i `uc ]
+[e :U 2280 ]
+"119
+[; ;user_app.c: 119:     }
+}
+[e :U 2279 ]
+[e :U 2278 ]
+[e :U 2276 ]
+"120
+[; ;user_app.c: 120: }
 [e :UE 2273 ]
 }
