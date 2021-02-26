@@ -72,8 +72,8 @@
 {
 "97
 [v UserAppRun@u8ButtonState u8ButtonState `uc  1 a 1 1 ]
-"102
-[v UserAppRun@u8LedCounter u8LedCounter `uc  1 a 1 0 ]
+"103
+[v UserAppRun@u32LedCounter u32LedCounter `uc  1 a 1 0 ]
 "128
 } 0
 "76
