@@ -90,9 +90,12 @@ void GpioSetup(void)
 {
     PORTA = 0x00;
     LATA = 0x80;
-    PORTB = 0x00;
     ANSELA = 0x00;
     TRISA = 0xFE;
+    
+    PORTB = 0x00; // Clear B ports
+    ANSELB = 0x00; // Enable digital I/O
+    TRISB = 0x30; // Set port RB5 and RB4 as INPUT
 } /* end GpioSetup() */
 
 

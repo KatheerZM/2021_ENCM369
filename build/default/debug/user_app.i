@@ -27315,19 +27315,31 @@ void UserAppInitialize(void)
 # 95 "user_app.c"
 void UserAppRun(void)
 {
+    u8 u8ButtonState = 0;
+
+
+
+
     u8 u8LedCounter = 0x80;
+
     while (1)
     {
-        if (u8LedCounter < 0xbf)
+        u8ButtonState = 1;
+        if (u8ButtonState == 0)
+        {
+            if (PORTB & 00100000 == 00100000)
+                u8ButtonState = 1;
+        }
+        else if (u8ButtonState == 1)
         {
             u8LedCounter++;
+            LATA = 10000000 | u8LedCounter;
+            u8ButtonState = 2;
         }
-        else
+        else if (u8ButtonState == 2)
         {
-            u8LedCounter = 0x80;
+            if (PORTB & 00100000 == 00000000)
+                u8ButtonState = 0;
         }
-        LATA = u8LedCounter;
-        _delay((unsigned long)((400)*(16000000/4000.0)));
     }
-
 }
