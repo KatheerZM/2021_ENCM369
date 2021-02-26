@@ -31,9 +31,9 @@
 [v _ClockSetup ClockSetup `(v  1 e 1 0 ]
 "89
 [v _GpioSetup GpioSetup `(v  1 e 1 0 ]
-"114
+"113
 [v _SysTickSetup SysTickSetup `(v  1 e 1 0 ]
-"136
+"135
 [v _SystemSleep SystemSleep `(v  1 e 1 0 ]
 "35 C:\Github\2021_ENCM369\main.c
 [v _main main `(v  1 e 1 0 ]
@@ -52,8 +52,6 @@
 [v _TRISA TRISA `VEuc  1 e 1 @1222 ]
 "45902
 [v _TRISB TRISB `VEuc  1 e 1 @1223 ]
-"46095
-[v _PORTA PORTA `VEuc  1 e 1 @1230 ]
 "46157
 [v _PORTB PORTB `VEuc  1 e 1 @1231 ]
 "14 C:\Github\2021_ENCM369\main.c
@@ -72,29 +70,31 @@
 "95 C:\Github\2021_ENCM369\user_app.c
 [v _UserAppRun UserAppRun `(v  1 e 1 0 ]
 {
+"97
+[v UserAppRun@u8ButtonState u8ButtonState `uc  1 a 1 1 ]
 "102
 [v UserAppRun@u8LedCounter u8LedCounter `uc  1 a 1 0 ]
-"124
+"128
 } 0
 "76
 [v _UserAppInitialize UserAppInitialize `(v  1 e 1 0 ]
 {
 "80
 } 0
-"136 C:\Github\2021_ENCM369\encm369_pic18.c
+"135 C:\Github\2021_ENCM369\encm369_pic18.c
 [v _SystemSleep SystemSleep `(v  1 e 1 0 ]
 {
-"139
+"138
 } 0
-"114
+"113
 [v _SysTickSetup SysTickSetup `(v  1 e 1 0 ]
 {
-"119
+"118
 } 0
 "89
 [v _GpioSetup GpioSetup `(v  1 e 1 0 ]
 {
-"99
+"98
 } 0
 "70
 [v _ClockSetup ClockSetup `(v  1 e 1 0 ]

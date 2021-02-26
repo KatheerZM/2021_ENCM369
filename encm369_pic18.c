@@ -88,10 +88,9 @@ Promises:
 */
 void GpioSetup(void)
 {
-    PORTA = 0x00;
-    LATA = 0x80;
+    LATA = 0x00;
     ANSELA = 0x00;
-    TRISA = 0xFE;
+    TRISA = 0x00;
     
     PORTB = 0x00; // Clear B ports
     ANSELB = 0x00; // Enable digital I/O

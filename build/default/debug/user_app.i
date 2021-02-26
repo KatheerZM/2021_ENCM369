@@ -27321,24 +27321,28 @@ void UserAppRun(void)
 
 
     u8 u8LedCounter = 0x80;
+    LATA = u8LedCounter;
 
     while (1)
     {
-        u8ButtonState = 1;
-        if (u8ButtonState == 0)
+        if (u8ButtonState < 20)
         {
-            if (PORTB & 00100000 == 00100000)
-                u8ButtonState = 1;
+            if ((PORTB & 0x20) == 0x20)
+                u8ButtonState++;
+            else
+            {
+                u8ButtonState = 0;
+            }
         }
-        else if (u8ButtonState == 1)
+        else if (u8ButtonState == 20)
         {
             u8LedCounter++;
-            LATA = 10000000 | u8LedCounter;
-            u8ButtonState = 2;
+            LATA = 0x80 | u8LedCounter;
+            u8ButtonState++;
         }
-        else if (u8ButtonState == 2)
+        else if (u8ButtonState == 21)
         {
-            if (PORTB & 00100000 == 00000000)
+            if ((PORTB & 0x20) == 0x00)
                 u8ButtonState = 0;
         }
     }
