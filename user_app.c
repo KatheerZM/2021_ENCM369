@@ -45,6 +45,7 @@ Global variable definitions with scope limited to this local application.
 Variable names shall start with "UserApp_<type>" and be declared as static.
 ***********************************************************************************************************************/
 
+u8 u8LedCounter = 0x80;
 
 /**********************************************************************************************************************
 Function Definitions
@@ -75,8 +76,11 @@ Promises:
 */
 void UserAppInitialize(void)
 {
-
-
+    T0CON0 = 0x90; 
+    T0CON1 = 0x54; 
+    
+    TMR0H = 0x00;   
+    TMR0L = 0x00;
 } /* end UserAppInitialize() */
 
   
@@ -94,8 +98,7 @@ Promises:
 */
 void UserAppRun(void)
 {
-    u8 u8LedCounter = 0x80;
-    while (1)
+    if (PIR3bits.TMR0IF == 1)
     {
         if (u8LedCounter < 0xbf)
         {
@@ -106,17 +109,29 @@ void UserAppRun(void)
             u8LedCounter = 0x80;
         }
         LATA = u8LedCounter;
-        __delay_ms(250);
+        TimeXus(0x03E8);
     }
+    
 
 } /* end UserAppRun */
 
 
-
-/*------------------------------------------------------------------------------------------------------------------*/
-/*! @privatesection */                                                                                            
-/*--------------------------------------------------------------------------------------------------------------------*/
-
+void TimeXus(u16 u16UserInput)
+{
+    
+    T0CON0 &= 0x7F; 
+    
+    u16 u16TimerStart = 0xFFFF - u16UserInput;
+    
+    TMR0H = (u8) ((u16TimerStart >> 8) & 0x00); 
+    TMR0L = (u8) (u16TimerStart & 0x00); 
+    
+    PIR3bits.TMR0IF = 0x00;
+    
+    
+    T0CON0 |= 0X80;
+    
+}
 
 
 

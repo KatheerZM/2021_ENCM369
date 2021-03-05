@@ -49,17 +49,22 @@ void main(void)
   /* Exit initialization */
     
   /* Super loop */  
+  
   while(1)
   {
     /* Drivers */
        
     /* Applications */
     UserAppRun();
-   
-     
+    
+    TimeXus(1000);
+    
+    
+    
     /* System sleep */
     HEARTBEAT_OFF();
     SystemSleep();
+    while (PIR3bits.TMR0IF != 1) { }
     HEARTBEAT_ON();
     
   } /* end while(1) main super loop */

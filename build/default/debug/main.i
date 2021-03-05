@@ -62,7 +62,8 @@
 
 
 #pragma config CP = OFF
-# 87 "./configuration.h"
+#pragma config CP = OFF
+# 88 "./configuration.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -27226,10 +27227,10 @@ __attribute__((__unsupported__("The READTIMER" "3" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\\pic\\include\\xc.h" 2 3
-# 87 "./configuration.h" 2
-# 96 "./configuration.h"
+# 88 "./configuration.h" 2
+# 97 "./configuration.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdbool.h" 1 3
-# 96 "./configuration.h" 2
+# 97 "./configuration.h" 2
 
 # 1 "./typedefs.h" 1
 # 31 "./typedefs.h"
@@ -27269,10 +27270,10 @@ typedef void(*fnCode_u16_type)(u16 x);
 
 
 typedef enum {ACTIVE_LOW = 0, ACTIVE_HIGH = 1} GpioActiveType;
-# 97 "./configuration.h" 2
+# 98 "./configuration.h" 2
 
 # 1 "./main.h" 1
-# 98 "./configuration.h" 2
+# 99 "./configuration.h" 2
 
 
 
@@ -27283,7 +27284,7 @@ void GpioSetup(void);
 
 void SysTickSetup(void);
 void SystemSleep(void);
-# 101 "./configuration.h" 2
+# 102 "./configuration.h" 2
 
 
 
@@ -27293,7 +27294,8 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-# 106 "./configuration.h" 2
+void TimeXus(u16 User_Input);
+# 107 "./configuration.h" 2
 # 6 "main.c" 2
 
 
@@ -27324,6 +27326,7 @@ void main(void)
 
 
 
+
   while(1)
   {
 
@@ -27331,11 +27334,15 @@ void main(void)
 
     UserAppRun();
 
+    TimeXus(1000);
 
 
-                   ;
+
+
+    (LATA &= 0x7F);
     SystemSleep();
-                  ;
+    while (PIR3bits.TMR0IF != 1) { }
+    (LATA |= 0x80);
 
   }
 

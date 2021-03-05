@@ -58,7 +58,8 @@
 
 
 #pragma config CP = OFF
-# 87 "./configuration.h"
+#pragma config CP = OFF
+# 88 "./configuration.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -27222,10 +27223,10 @@ __attribute__((__unsupported__("The READTIMER" "3" "() macro is not available wi
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 34 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\\pic\\include\\xc.h" 2 3
-# 87 "./configuration.h" 2
-# 96 "./configuration.h"
+# 88 "./configuration.h" 2
+# 97 "./configuration.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c99\\stdbool.h" 1 3
-# 96 "./configuration.h" 2
+# 97 "./configuration.h" 2
 
 # 1 "./typedefs.h" 1
 # 31 "./typedefs.h"
@@ -27265,10 +27266,10 @@ typedef void(*fnCode_u16_type)(u16 x);
 
 
 typedef enum {ACTIVE_LOW = 0, ACTIVE_HIGH = 1} GpioActiveType;
-# 97 "./configuration.h" 2
+# 98 "./configuration.h" 2
 
 # 1 "./main.h" 1
-# 98 "./configuration.h" 2
+# 99 "./configuration.h" 2
 
 
 
@@ -27279,7 +27280,7 @@ void GpioSetup(void);
 
 void SysTickSetup(void);
 void SystemSleep(void);
-# 101 "./configuration.h" 2
+# 102 "./configuration.h" 2
 
 
 
@@ -27289,7 +27290,8 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-# 106 "./configuration.h" 2
+void TimeXus(u16 User_Input);
+# 107 "./configuration.h" 2
 # 26 "user_app.c" 2
 
 
@@ -27306,15 +27308,55 @@ volatile u8 G_u8UserAppFlags;
 extern volatile u32 G_u32SystemTime1ms;
 extern volatile u32 G_u32SystemTime1s;
 extern volatile u32 G_u32SystemFlags;
-# 76 "user_app.c"
+
+
+
+
+
+
+
+u8 u8LedCounter = 0x80;
+# 77 "user_app.c"
 void UserAppInitialize(void)
 {
-
+    T0CON0 = 0x90;
+    T0CON1 = 0x44;
+    TMR0H = 0x00;
+    TMR0L = 0x00;
 
 }
-# 95 "user_app.c"
+# 99 "user_app.c"
 void UserAppRun(void)
 {
 
+    if (u8LedCounter < 0xbf)
+    {
+        u8LedCounter++;
+    }
+    else
+    {
+        u8LedCounter = 0x80;
+    }
+    LATA = u8LedCounter;
+
+}
+
+
+
+
+
+
+void TimeXus(u16 User_Input)
+{
+
+    T0CON0 &= 0X7F;
+
+    u16 timer_end = 0xFFFF - User_Input;
+
+    TMR0L = (u8) (timer_end & 0x0000);
+    TMR0H = (u8) ((timer_end >> 8)&0x0000);
+
+    PIR3bits.TMR0IF = 0x00;
+    T0CON0 |= 0X80;
 
 }

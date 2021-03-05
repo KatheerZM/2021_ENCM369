@@ -1,7 +1,7 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"46095 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 46095: extern volatile unsigned char PORTA __attribute__((address(0x4CE)));
-[v _PORTA `Vuc ~T0 @X0 0 e@1230 ]
+"45585 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 45585: extern volatile unsigned char LATA __attribute__((address(0x4BE)));
+[v _LATA `Vuc ~T0 @X0 0 e@1214 ]
 "37918
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 37918: extern volatile unsigned char ANSELA __attribute__((address(0x400)));
 [v _ANSELA `Vuc ~T0 @X0 0 e@1024 ]
@@ -77,6 +77,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "74
 [p x WRTAPP  =  OFF      ]
 "77
+[p x CP  =  OFF          ]
+"78
 [p x CP  =  OFF          ]
 "329 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 329: __asm("CLKRCON equ 039h");
@@ -2556,14 +2558,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _GpioSetup ]
 [f ]
 "91
-[; ;encm369_pic18.c: 91:     PORTA = 0x00;
-[e = _PORTA -> -> 0 `i `uc ]
+[; ;encm369_pic18.c: 91:     LATA = 0x00;
+[e = _LATA -> -> 0 `i `uc ]
 "92
 [; ;encm369_pic18.c: 92:     ANSELA = 0x00;
 [e = _ANSELA -> -> 0 `i `uc ]
 "93
-[; ;encm369_pic18.c: 93:     TRISA = 0xFE;
-[e = _TRISA -> -> 254 `i `uc ]
+[; ;encm369_pic18.c: 93:     TRISA = 0x00;
+[e = _TRISA -> -> 0 `i `uc ]
 "94
 [; ;encm369_pic18.c: 94: }
 [e :UE 2273 ]
