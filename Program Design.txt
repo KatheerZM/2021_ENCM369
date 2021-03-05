@@ -1,15 +1,21 @@
-Code Design
-
-count = 1000 000 (binary)
-Loop
+main function
 {
-	if (count < 1011 1111)
-	{
-		increment count
-	}
-	else
-	{
-		count = 1000 000
-	}
-	LATA = count
+	SetTimer();
+	userApp();
+	while (timer is not flagged) { loop }
+}
+
+userApp()
+{
+	Increment LED Number
+	Update
+}
+
+SetTimer()
+{
+	Turn it off;
+	Set integer where we want timer to start so it rolls over at the correct amount of time;
+	Set TMR0H and TMR0H using the integer just set;
+	turn off flag;
+	Turn on timer;
 }
