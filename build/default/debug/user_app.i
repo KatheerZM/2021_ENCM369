@@ -27290,7 +27290,7 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 User_Input);
+void TimeXus(u16 u16UserInput);
 # 107 "./configuration.h" 2
 # 26 "user_app.c" 2
 
@@ -27320,10 +27320,10 @@ u8 u8LedCounter = 0x80;
 void UserAppInitialize(void)
 {
     T0CON0 = 0x90;
-    T0CON1 = 0x54;
+    T0CON1 = 0x5E;
+
     TMR0H = 0x00;
     TMR0L = 0x00;
-
 }
 # 99 "user_app.c"
 void UserAppRun(void)
@@ -27344,10 +27344,6 @@ void UserAppRun(void)
 
 
 }
-
-
-
-
 
 
 void TimeXus(u16 u16UserInput)

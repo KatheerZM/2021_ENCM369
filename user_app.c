@@ -77,7 +77,7 @@ Promises:
 void UserAppInitialize(void)
 {
     T0CON0 = 0x90; 
-    T0CON1 = 0x54; 
+    T0CON1 = 0x5E; 
     
     TMR0H = 0x00;   
     TMR0L = 0x00;

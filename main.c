@@ -57,7 +57,7 @@ void main(void)
     /* Applications */
     UserAppRun();
     
-    TimeXus(1000);
+    TimeXus(1);
     
     
     
