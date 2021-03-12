@@ -25,6 +25,7 @@ Variable names shall start with "Main_" and be declared as static.
 ***********************************************************************************************************************/
 
 
+
 /*!**********************************************************************************************************************
 @fn void main(void)
 @brief Main program where all tasks are initialized and executed.
@@ -50,15 +51,20 @@ void main(void)
     
   /* Super loop */  
   
-  LATA = 0x80;
+  
   while(1)
   {
     /* Drivers */
-       
+#if 1
+      TimeXus(12);
+      while (PIR3bits.TMR0IF != 1) { }
+      UserAppRun();
+#endif
+    
+#if 0
     /* Applications */
     UserAppRun();
-    
-    TimeXus(0xffff);
+    TimeXus(4);
     
     while (PIR3bits.TMR0IF != 1) { }
     
@@ -67,7 +73,7 @@ void main(void)
     SystemSleep();
     
     HEARTBEAT_ON();
-    
+#endif   
   } /* end while(1) main super loop */
   
 } /* end main() */

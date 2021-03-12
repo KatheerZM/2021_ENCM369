@@ -27308,7 +27308,7 @@ void TimeXus(u16 u16UserInput);
 volatile u32 G_u32SystemTime1ms = 0;
 volatile u32 G_u32SystemTime1s = 0;
 volatile u32 G_u32SystemFlags = 0;
-# 35 "main.c"
+# 36 "main.c"
 void main(void)
 {
   G_u32SystemFlags |= (u32)0x80000000;
@@ -27327,24 +27327,15 @@ void main(void)
 
 
 
-  LATA = 0x80;
+
   while(1)
   {
 
 
-
-    UserAppRun();
-
-    TimeXus(10000);
-
-    while (PIR3bits.TMR0IF != 1) { }
-
-
-    (LATA &= 0x7F);
-    SystemSleep();
-
-    (LATA |= 0x80);
-
+      TimeXus(12);
+      while (PIR3bits.TMR0IF != 1) { }
+      UserAppRun();
+# 77 "main.c"
   }
 
 }
