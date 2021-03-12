@@ -11,9 +11,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "22235
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 22235: extern volatile unsigned char TMR0L __attribute__((address(0x318)));
 [v _TMR0L `Vuc ~T0 @X0 0 e@792 ]
-"45585
-[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 45585: extern volatile unsigned char LATA __attribute__((address(0x4BE)));
-[v _LATA `Vuc ~T0 @X0 0 e@1214 ]
 "44876
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 44876:     struct {
 [s S2125 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -25,6 +22,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "44887
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 44887: extern volatile PIR3bits_t PIR3bits __attribute__((address(0x4B1)));
 [v _PIR3bits `VS2124 ~T0 @X0 0 e@1201 ]
+"45585
+[; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 45585: extern volatile unsigned char LATA __attribute__((address(0x4BE)));
+[v _LATA `Vuc ~T0 @X0 0 e@1214 ]
+"29 ./user_app.h
+[; ;./user_app.h: 29: void TimeXus(u16 u16UserInput);
+[v _TimeXus `(v ~T0 @X0 0 ef1`us ]
 "30 ./configuration.h
 [p x FEXTOSC  =  OFF     ]
 "31
@@ -2569,13 +2572,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 79:     T0CON0 = 0x90;
 [e = _T0CON0 -> -> 144 `i `uc ]
 "80
-[; ;user_app.c: 80:     T0CON1 = 0x44;
-[e = _T0CON1 -> -> 68 `i `uc ]
-"81
-[; ;user_app.c: 81:     TMR0H = 0x00;
-[e = _TMR0H -> -> 0 `i `uc ]
+[; ;user_app.c: 80:     T0CON1 = 0x5E;
+[e = _T0CON1 -> -> 94 `i `uc ]
 "82
-[; ;user_app.c: 82:     TMR0L = 0x00;
+[; ;user_app.c: 82:     TMR0H = 0x00;
+[e = _TMR0H -> -> 0 `i `uc ]
+"83
+[; ;user_app.c: 83:     TMR0L = 0x00;
 [e = _TMR0L -> -> 0 `i `uc ]
 "84
 [; ;user_app.c: 84: }
@@ -2589,72 +2592,85 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _UserAppRun ]
 [f ]
+"101
+[; ;user_app.c: 101:     if (PIR3bits.TMR0IF == 1)
+[e $ ! == -> . . _PIR3bits 0 7 `i -> 1 `i 2274  ]
 "102
-[; ;user_app.c: 102:     if (u8LedCounter < 0xbf)
-[e $ ! < -> _u8LedCounter `i -> 191 `i 2274  ]
+[; ;user_app.c: 102:     {
+{
 "103
-[; ;user_app.c: 103:     {
-{
+[; ;user_app.c: 103:         if (u8LedCounter < 0xbf)
+[e $ ! < -> _u8LedCounter `i -> 191 `i 2275  ]
 "104
-[; ;user_app.c: 104:         u8LedCounter++;
-[e ++ _u8LedCounter -> -> 1 `i `uc ]
-"105
-[; ;user_app.c: 105:     }
-}
-[e $U 2275  ]
-"106
-[; ;user_app.c: 106:     else
-[e :U 2274 ]
-"107
-[; ;user_app.c: 107:     {
+[; ;user_app.c: 104:         {
 {
-"108
-[; ;user_app.c: 108:         u8LedCounter = 0x80;
-[e = _u8LedCounter -> -> 128 `i `uc ]
-"109
-[; ;user_app.c: 109:     }
+"105
+[; ;user_app.c: 105:             u8LedCounter++;
+[e ++ _u8LedCounter -> -> 1 `i `uc ]
+"106
+[; ;user_app.c: 106:         }
 }
+[e $U 2276  ]
+"107
+[; ;user_app.c: 107:         else
 [e :U 2275 ]
+"108
+[; ;user_app.c: 108:         {
+{
+"109
+[; ;user_app.c: 109:             u8LedCounter = 0x80;
+[e = _u8LedCounter -> -> 128 `i `uc ]
 "110
-[; ;user_app.c: 110:     LATA = u8LedCounter;
+[; ;user_app.c: 110:         }
+}
+[e :U 2276 ]
+"111
+[; ;user_app.c: 111:         LATA = u8LedCounter;
 [e = _LATA _u8LedCounter ]
 "112
-[; ;user_app.c: 112: }
+[; ;user_app.c: 112:         TimeXus(0x03E8);
+[e ( _TimeXus (1 -> -> 1000 `i `us ]
+"113
+[; ;user_app.c: 113:     }
+}
+[e :U 2274 ]
+"116
+[; ;user_app.c: 116: }
 [e :UE 2273 ]
 }
 "119
-[; ;user_app.c: 119: void TimeXus(u16 User_Input)
+[; ;user_app.c: 119: void TimeXus(u16 u16UserInput)
 [v _TimeXus `(v ~T0 @X0 1 ef1`us ]
 "120
 [; ;user_app.c: 120: {
 {
 [e :U _TimeXus ]
 "119
-[; ;user_app.c: 119: void TimeXus(u16 User_Input)
-[v _User_Input `us ~T0 @X0 1 r1 ]
+[; ;user_app.c: 119: void TimeXus(u16 u16UserInput)
+[v _u16UserInput `us ~T0 @X0 1 r1 ]
 "120
 [; ;user_app.c: 120: {
 [f ]
 "122
-[; ;user_app.c: 122:     T0CON0 &= 0X7F;
+[; ;user_app.c: 122:     T0CON0 &= 0x7F;
 [e =& _T0CON0 -> -> 127 `i `Vuc ]
 "124
-[; ;user_app.c: 124:     u16 timer_end = 0xFFFF - User_Input;
-[v _timer_end `us ~T0 @X0 1 a ]
-[e = _timer_end -> - -> 65535 `ui -> _User_Input `ui `us ]
+[; ;user_app.c: 124:     u16 u16TimerStart = 0xFFFF - u16UserInput;
+[v _u16TimerStart `us ~T0 @X0 1 a ]
+[e = _u16TimerStart -> - -> 65535 `ui -> _u16UserInput `ui `us ]
 "126
-[; ;user_app.c: 126:     TMR0L = (u8) (timer_end & 0x0000);
-[e = _TMR0L -> & -> _timer_end `ui -> -> 0 `i `ui `uc ]
+[; ;user_app.c: 126:     TMR0H = (u8) ((u16TimerStart >> 8) & 0x00);
+[e = _TMR0H -> & >> -> _u16TimerStart `ui -> 8 `i -> -> 0 `i `ui `uc ]
 "127
-[; ;user_app.c: 127:     TMR0H = (u8) ((timer_end >> 8)&0x0000);
-[e = _TMR0H -> & >> -> _timer_end `ui -> 8 `i -> -> 0 `i `ui `uc ]
+[; ;user_app.c: 127:     TMR0L = (u8) (u16TimerStart & 0x00);
+[e = _TMR0L -> & -> _u16TimerStart `ui -> -> 0 `i `ui `uc ]
 "129
 [; ;user_app.c: 129:     PIR3bits.TMR0IF = 0x00;
 [e = . . _PIR3bits 0 7 -> -> 0 `i `uc ]
-"130
-[; ;user_app.c: 130:     T0CON0 |= 0X80;
-[e =| _T0CON0 -> -> 128 `i `Vuc ]
 "132
-[; ;user_app.c: 132: }
-[e :UE 2276 ]
+[; ;user_app.c: 132:     T0CON0 |= 0X80;
+[e =| _T0CON0 -> -> 128 `i `Vuc ]
+"134
+[; ;user_app.c: 134: }
+[e :UE 2277 ]
 }

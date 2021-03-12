@@ -25,9 +25,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "45585
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC18F-Q_DFP/1.8.154/xc8\pic\include\proc\pic18f27q43.h: 45585: extern volatile unsigned char LATA __attribute__((address(0x4BE)));
 [v _LATA `Vuc ~T0 @X0 0 e@1214 ]
-"29 ./user_app.h
-[; ;./user_app.h: 29: void TimeXus(u16 u16UserInput);
-[v _TimeXus `(v ~T0 @X0 0 ef1`us ]
 "30 ./configuration.h
 [p x FEXTOSC  =  OFF     ]
 "31
@@ -2572,8 +2569,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 79:     T0CON0 = 0x90;
 [e = _T0CON0 -> -> 144 `i `uc ]
 "80
-[; ;user_app.c: 80:     T0CON1 = 0x5E;
-[e = _T0CON1 -> -> 94 `i `uc ]
+[; ;user_app.c: 80:     T0CON1 = 0x54;
+[e = _T0CON1 -> -> 84 `i `uc ]
 "82
 [; ;user_app.c: 82:     TMR0H = 0x00;
 [e = _TMR0H -> -> 0 `i `uc ]
@@ -2628,49 +2625,46 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;user_app.c: 111:         LATA = u8LedCounter;
 [e = _LATA _u8LedCounter ]
 "112
-[; ;user_app.c: 112:         TimeXus(0x03E8);
-[e ( _TimeXus (1 -> -> 1000 `i `us ]
-"113
-[; ;user_app.c: 113:     }
+[; ;user_app.c: 112:     }
 }
 [e :U 2274 ]
-"116
-[; ;user_app.c: 116: }
+"115
+[; ;user_app.c: 115: }
 [e :UE 2273 ]
 }
-"119
-[; ;user_app.c: 119: void TimeXus(u16 u16UserInput)
+"118
+[; ;user_app.c: 118: void TimeXus(u16 u16UserInput)
 [v _TimeXus `(v ~T0 @X0 1 ef1`us ]
-"120
-[; ;user_app.c: 120: {
+"119
+[; ;user_app.c: 119: {
 {
 [e :U _TimeXus ]
-"119
-[; ;user_app.c: 119: void TimeXus(u16 u16UserInput)
+"118
+[; ;user_app.c: 118: void TimeXus(u16 u16UserInput)
 [v _u16UserInput `us ~T0 @X0 1 r1 ]
-"120
-[; ;user_app.c: 120: {
+"119
+[; ;user_app.c: 119: {
 [f ]
-"122
-[; ;user_app.c: 122:     T0CON0 &= 0x7F;
+"121
+[; ;user_app.c: 121:     T0CON0 &= 0x7F;
 [e =& _T0CON0 -> -> 127 `i `Vuc ]
-"124
-[; ;user_app.c: 124:     u16 u16TimerStart = 0xFFFF - u16UserInput;
+"123
+[; ;user_app.c: 123:     u16 u16TimerStart = 0xFFFF - u16UserInput;
 [v _u16TimerStart `us ~T0 @X0 1 a ]
 [e = _u16TimerStart -> - -> 65535 `ui -> _u16UserInput `ui `us ]
+"125
+[; ;user_app.c: 125:     TMR0H = (u8) ((u16TimerStart >> 8) | 0x00);
+[e = _TMR0H -> | >> -> _u16TimerStart `ui -> 8 `i -> -> 0 `i `ui `uc ]
 "126
-[; ;user_app.c: 126:     TMR0H = (u8) ((u16TimerStart >> 8) & 0x00);
-[e = _TMR0H -> & >> -> _u16TimerStart `ui -> 8 `i -> -> 0 `i `ui `uc ]
-"127
-[; ;user_app.c: 127:     TMR0L = (u8) (u16TimerStart & 0x00);
-[e = _TMR0L -> & -> _u16TimerStart `ui -> -> 0 `i `ui `uc ]
-"129
-[; ;user_app.c: 129:     PIR3bits.TMR0IF = 0x00;
+[; ;user_app.c: 126:     TMR0L = (u8) (u16TimerStart | 0x00);
+[e = _TMR0L -> | -> _u16TimerStart `ui -> -> 0 `i `ui `uc ]
+"128
+[; ;user_app.c: 128:     PIR3bits.TMR0IF = 0x00;
 [e = . . _PIR3bits 0 7 -> -> 0 `i `uc ]
-"132
-[; ;user_app.c: 132:     T0CON0 |= 0X80;
+"131
+[; ;user_app.c: 131:     T0CON0 |= 0X80;
 [e =| _T0CON0 -> -> 128 `i `Vuc ]
-"134
-[; ;user_app.c: 134: }
+"133
+[; ;user_app.c: 133: }
 [e :UE 2277 ]
 }

@@ -27290,7 +27290,7 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 User_Input);
+void TimeXus(u16 u16UserInput);
 # 107 "./configuration.h" 2
 # 24 "encm369_pic18.c" 2
 # 37 "encm369_pic18.c"
@@ -27306,7 +27306,7 @@ void ClockSetup(void)
 # 89 "encm369_pic18.c"
 void GpioSetup(void)
 {
-    LATA = 0x00;
+    LATA = 0x40;
     ANSELA = 0x00;
     TRISA = 0x00;
 }

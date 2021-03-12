@@ -27290,7 +27290,7 @@ void SystemSleep(void);
 # 27 "./user_app.h"
 void UserAppInitialize(void);
 void UserAppRun(void);
-void TimeXus(u16 User_Input);
+void TimeXus(u16 u16UserInput);
 # 107 "./configuration.h" 2
 # 26 "user_app.c" 2
 
@@ -27320,43 +27320,45 @@ u8 u8LedCounter = 0x80;
 void UserAppInitialize(void)
 {
     T0CON0 = 0x90;
-    T0CON1 = 0x44;
+    T0CON1 = 0x5E;
+
     TMR0H = 0x00;
     TMR0L = 0x00;
-
 }
 # 99 "user_app.c"
 void UserAppRun(void)
 {
+    if (PIR3bits.TMR0IF == 1)
+    {
+        if (u8LedCounter < 0xbf)
+        {
+            u8LedCounter++;
+        }
+        else
+        {
+            u8LedCounter = 0x80;
+        }
+        LATA = u8LedCounter;
+        TimeXus(0x03E8);
+    }
 
-    if (u8LedCounter < 0xbf)
-    {
-        u8LedCounter++;
-    }
-    else
-    {
-        u8LedCounter = 0x80;
-    }
-    LATA = u8LedCounter;
 
 }
 
 
-
-
-
-
-void TimeXus(u16 User_Input)
+void TimeXus(u16 u16UserInput)
 {
 
-    T0CON0 &= 0X7F;
+    T0CON0 &= 0x7F;
 
-    u16 timer_end = 0xFFFF - User_Input;
+    u16 u16TimerStart = 0xFFFF - u16UserInput;
 
-    TMR0L = (u8) (timer_end & 0x0000);
-    TMR0H = (u8) ((timer_end >> 8)&0x0000);
+    TMR0H = (u8) ((u16TimerStart >> 8) & 0x00);
+    TMR0L = (u8) (u16TimerStart & 0x00);
 
     PIR3bits.TMR0IF = 0x00;
+
+
     T0CON0 |= 0X80;
 
 }

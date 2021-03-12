@@ -27327,6 +27327,7 @@ void main(void)
 
 
 
+  LATA = 0x80;
   while(1)
   {
 
@@ -27334,14 +27335,14 @@ void main(void)
 
     UserAppRun();
 
-    TimeXus(1);
+    TimeXus(10000);
 
-
+    while (PIR3bits.TMR0IF != 1) { }
 
 
     (LATA &= 0x7F);
     SystemSleep();
-    while (PIR3bits.TMR0IF != 1) { }
+
     (LATA |= 0x80);
 
   }

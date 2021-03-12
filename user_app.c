@@ -77,7 +77,7 @@ Promises:
 void UserAppInitialize(void)
 {
     T0CON0 = 0x90; 
-    T0CON1 = 0x5E; 
+    T0CON1 = 0x54; 
     
     TMR0H = 0x00;   
     TMR0L = 0x00;
@@ -109,7 +109,6 @@ void UserAppRun(void)
             u8LedCounter = 0x80;
         }
         LATA = u8LedCounter;
-        TimeXus(0x03E8);
     }
     
 
@@ -123,8 +122,8 @@ void TimeXus(u16 u16UserInput)
     
     u16 u16TimerStart = 0xFFFF - u16UserInput;
     
-    TMR0H = (u8) ((u16TimerStart >> 8) & 0x00); 
-    TMR0L = (u8) (u16TimerStart & 0x00); 
+    TMR0H = (u8) ((u16TimerStart >> 8) | 0x00); 
+    TMR0L = (u8) (u16TimerStart | 0x00); 
     
     PIR3bits.TMR0IF = 0x00;
     

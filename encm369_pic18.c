@@ -88,7 +88,7 @@ Promises:
 */
 void GpioSetup(void)
 {
-    LATA = 0x00;
+    LATA = 0x40;
     ANSELA = 0x00;
     TRISA = 0x00;
 } /* end GpioSetup() */

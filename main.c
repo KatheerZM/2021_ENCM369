@@ -50,6 +50,7 @@ void main(void)
     
   /* Super loop */  
   
+  LATA = 0x80;
   while(1)
   {
     /* Drivers */
@@ -57,14 +58,14 @@ void main(void)
     /* Applications */
     UserAppRun();
     
-    TimeXus(1);
+    TimeXus(0xffff);
     
-    
+    while (PIR3bits.TMR0IF != 1) { }
     
     /* System sleep */
     HEARTBEAT_OFF();
     SystemSleep();
-    while (PIR3bits.TMR0IF != 1) { }
+    
     HEARTBEAT_ON();
     
   } /* end while(1) main super loop */
