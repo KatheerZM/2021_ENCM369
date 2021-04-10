@@ -250,7 +250,7 @@ void UserAppRun(void)
     if (u16Delay == UserApp_au16Delays[u16NotePosition])
     {
         u16NotePosition++;
-        u16Delay = 0x00;
+        u16Delay = 0;
         
         for(int i = 0; i < REGULAR_NOTE_ADJUSTMENT; i++)
         {
@@ -260,7 +260,7 @@ void UserAppRun(void)
     
     if (u16NotePosition == 15)
     {
-        u16NotePosition = 0x00;
+        u16NotePosition = 0;
     }
   
 } /* end UserAppRun() */
